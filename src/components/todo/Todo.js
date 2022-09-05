@@ -45,6 +45,7 @@ const TodoInput = styled.input`
   height: 23px;
   &:focus {
     outline: none;
+    border: 2px solid rgb(83, 168, 202);
   }
 `;
 const Button = styled.button`
@@ -89,7 +90,7 @@ export const Todo = () => {
   };
 
   const addTask = () => {
-    if (!textQuery) return;
+    if (!textQuery.trim()) return;
     if (editMode) {
       setTasks(
         tasks &&
@@ -108,7 +109,6 @@ export const Todo = () => {
   };
 
   const editTask = (task) => {
-    console.log(task);
     setEditMode(true);
     idx = tasks.find((item) => item.date === task.date);
     setTextQuery(task.name);
@@ -166,6 +166,7 @@ export const Todo = () => {
       <AddTodo className="add_todo">
         <TodoInput
           value={textQuery}
+          placeholder="Add a task.."
           onChange={handleTextChange}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
